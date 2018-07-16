@@ -5,18 +5,13 @@
 </template>
 
 <script>
-  import Task from "../models/task";
   import TaskItem from "./TaskItem";
 
   export default {
     name: 'TaskList',
+    props: ['tasks'],
     components: {
       TaskItem
-    },
-    data(){
-      return {
-        tasks: [...Array(3).keys()].map(id => new Task({id, name: `Task ${id + 1}`}))
-      }
     }
   }
 </script>

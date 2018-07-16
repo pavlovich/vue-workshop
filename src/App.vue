@@ -1,96 +1,123 @@
 <template>
   <v-app>
-    <v-navigation-drawer
-      persistent
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      v-model="drawer"
-      enable-resize-watcher
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-tile
-          value="true"
-          v-for="(item, i) in items"
-          :key="i"
-        >
-          <v-list-tile-action>
-            <v-icon v-html="item.icon"></v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-toolbar
-      app
-      :clipped-left="clipped"
-    >
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>remove</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+    <v-toolbar class="navbar" app>
+      <v-toolbar-title class="mr-4">Task Master</v-toolbar-title>
+      <v-toolbar-items>
+        <v-btn flat class="active"><a>Tasks</a></v-btn>
+      </v-toolbar-items>
       <v-spacer></v-spacer>
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>menu</v-icon>
-      </v-btn>
+      <div class="username">
+        <label for="username">Logged In User:</label><input name="username" placeholder="your email address" type="text">
+      </div>
     </v-toolbar>
     <v-content>
-      <HelloWorld/>
+      <v-container fluid>
+        <v-layout column>
+          <v-flex xs12 class="pt-3">
+            <div class="result-container">
+              <v-layout row justify-center align-center fill-height>
+                <v-flex xs8>
+                  <v-card class="tasks">
+                    <header class="task-list-header">
+                      <h1>Task List</h1>
+                    </header>
+                    <ul class="task-list">
+                      <li class="task-item">
+                        <span class="text">Task 1</span>
+                      </li>
+
+                      <li class="task-item">
+                        <span class="text">Task 2</span>
+                      </li>
+
+                      <li class="task-item">
+                        <span class="text">Task 3</span>
+                      </li>
+                    </ul>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+            </div>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-content>
-    <v-navigation-drawer
-      temporary
-      :right="right"
-      v-model="rightDrawer"
-      fixed
-      app
-    >
-      <v-list>
-        <v-list-tile @click="right = !right">
-          <v-list-tile-action>
-            <v-icon>compare_arrows</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2017</span>
+    <v-footer app>
+      <span class="ml-2">&copy; 2018</span><span class="ml-1">[ Your company name here ]</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+  export default { }
+</script>
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  },
-  data () {
-    return {
-      clipped: false,
-      drawer: true,
-      fixed: false,
-      items: [{
-        icon: 'bubble_chart',
-        title: 'Inspire'
-      }],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js'
+<style scoped lang="less">
+
+  button, input, select, textarea {
+    border-style: inherit;
+  }
+
+  .navbar {
+    background-color: #f1faf6;
+
+    .v-btn {
+      color: #777;
+      background-color: transparent;
+      cursor: pointer;
+
+      &.active {
+        color: #555;
+        background-color: #e7e7e7;
+        cursor: pointer;
+      }
+
+      &:hover {
+        color: #333;
+        background-color: #92e7bf;
+      }
+    }
+
+    .username {
+      label {
+        font-weight: normal;
+        margin-right: 10px;
+      }
+
+      input {
+        border: 1px inset lightgreen;
+        width: 200px;
+        padding: 3px;
+        text-align: center;
+      }
     }
   }
-}
-</script>
+
+  .result-container {
+    height: 100%;
+  }
+
+  .task-list-header {
+    position: relative;
+    padding: 1px 1px 1px 10px;
+    background: linear-gradient(to bottom, #41B683, #88D4B3 100%);
+    border-bottom: #41B683 solid 2px;
+  }
+
+  .task-list {
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+
+  .task-item {
+    position: relative;
+    box-sizing: content-box;
+    padding: 15px;
+    height: 22px;
+    list-style: none;
+    background-color: white;
+    border-bottom: #41B683 solid 1px;
+  }
+
+</style>

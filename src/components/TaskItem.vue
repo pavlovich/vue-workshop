@@ -1,6 +1,6 @@
 <template>
   <li class="task-item">
-    <span class="text">{{task}}</span>
+    <span class="text">{{task.name}}</span>
   </li>
 </template>
 

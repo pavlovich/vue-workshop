@@ -1,10 +1,11 @@
 <template>
   <ul class="task-list">
-    <TaskItem v-for="task in tasks" :task="task" />
+    <TaskItem v-for="task in tasks" :key="task.id" :task="task" />
   </ul>
 </template>
 
 <script>
+  import Task from "../models/task";
   import TaskItem from "./TaskItem";
 
   export default {
@@ -14,7 +15,7 @@
     },
     data(){
       return {
-        tasks: ['Task 1', 'Task 2', 'Task 3']
+        tasks: [...Array(3).keys()].map(id => new Task({id, name: `Task ${id + 1}`}))
       }
     }
   }

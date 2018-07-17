@@ -10,7 +10,7 @@
                   <TaskListHeader />
                   <TaskFilter @update:filterString="updateTaskFilter" />
                   <TaskList :tasks="filteredTasks" />
-                  <NewTask :task="newTask" @create:task="createTask" />
+                  <NewTask :task="newTask" @create:task="createTask" v-if="isLoggedOn" />
                 </v-card>
               </v-flex>
             </v-layout>
@@ -31,6 +31,7 @@
 
   export default {
     name: "Tasks",
+    props: ['isLoggedOn'],
     components: {
       TaskList,
       TaskListHeader,

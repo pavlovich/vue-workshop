@@ -1,6 +1,7 @@
 <template>
   <ul class="task-list">
     <TaskItem v-for="task in tasks" :key="task.id" :task="task" />
+    <li class="task-item" v-if="!tasks || tasks.length === 0">No tasks found.</li>
   </ul>
 </template>
 

@@ -6,14 +6,27 @@
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <div class="username">
-      <label for="username">Logged In User:</label><input name="username" placeholder="your email address" type="text">
+      <label for="username">Logged In User:</label>
+      <input name="username" placeholder="your email address" type="text"
+             v-model="username"
+             @keyup.enter="handleUsernameChanged">
     </div>
   </v-toolbar>
 </template>
 
 <script>
   export default {
-    name: "NavBar"
+    name: "NavBar",
+    data(){
+      return {
+        username: null
+      }
+    },
+    methods: {
+      handleUsernameChanged(){
+        this.$emit('toggleLogon', this.username && this.username.trim());
+      }
+    }
   }
 </script>
 

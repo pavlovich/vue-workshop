@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <NavBar @toggleLogon="toggleLogon" />
-    <Tasks :isLoggedOn="isLoggedOn" />
+    <Tasks :username="username" />
     <Footer />
   </v-app>
 </template>
@@ -20,11 +20,6 @@
     data(){
       return {
         username: null
-      }
-    },
-    computed: {
-      isLoggedOn(){
-        return !!this.username;
       }
     },
     methods: {

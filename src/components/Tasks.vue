@@ -31,7 +31,7 @@
 
   export default {
     name: "Tasks",
-    props: ['isLoggedOn'],
+    props: ['username'],
     components: {
       TaskList,
       TaskListHeader,
@@ -50,6 +50,9 @@
       filteredTasks(){
         return this.tasks
           .filter((task) => {return task.name && this.filterString ? task.name.includes(this.filterString) : true});
+      },
+      isLoggedOn(){
+        return !!this.username;
       }
     },
     methods: {
@@ -69,6 +72,7 @@
       },
       createTask(){
         this.newTask.id = this.getNextId();
+        this.newTask.owner = this.username;
         this.addTask(this.newTask);
         this.newTask = new Task({});
       }

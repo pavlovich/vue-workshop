@@ -19,11 +19,3 @@
     }
   }
 </script>
-
-<style scoped lang="less">
-
-  button, input, select, textarea {
-    border-style: inherit;
-  }
-
-</style>

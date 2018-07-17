@@ -9,7 +9,3 @@
     name: "Footer"
   }
 </script>
-
-<style scoped lang="less">
-
-</style>

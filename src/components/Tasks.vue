@@ -1,24 +1,10 @@
 <template>
-  <v-content>
-    <v-container fluid>
-      <v-layout column>
-        <v-flex xs12 class="pt-3">
-          <div class="result-container">
-            <v-layout row justify-center align-center fill-height>
-              <v-flex xs8>
-                <v-card class="tasks">
-                  <TaskListHeader />
-                  <TaskFilter />
-                  <TaskList />
-                  <NewTask />
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </div>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </v-content>
+  <v-card class="tasks">
+    <TaskListHeader />
+    <TaskFilter />
+    <TaskList />
+    <NewTask />
+  </v-card>
 </template>
 
 <script>
@@ -38,10 +24,3 @@
   };
 </script>
 
-<style scoped lang="less">
-
-  .result-container {
-    height: 100%;
-  }
-
-</style>

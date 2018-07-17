@@ -9,3 +9,9 @@
     name: "Footer"
   }
 </script>
+
+<style lang="less">
+  .v-footer {
+    border-top: 2px outset #9bdac9;
+  }
+</style>

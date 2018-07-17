@@ -2,7 +2,11 @@
   <v-toolbar class="navbar" app>
     <v-toolbar-title class="mr-4">Task Master</v-toolbar-title>
     <v-toolbar-items>
-      <v-btn flat class="active"><a>Tasks</a></v-btn>
+      <v-layout row align-space-around>
+      <router-link to="/" class="router-link">Home</router-link>
+      <router-link to="/about" class="router-link">About</router-link>
+      <router-link to="/tasks" class="router-link">Tasks</router-link>
+      </v-layout>
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <div class="username">
@@ -38,21 +42,25 @@
   .navbar {
     background-color: #f1faf6;
 
-    .v-btn {
+    .router-link, router-link-exact-active {
       color: #777;
       background-color: transparent;
       cursor: pointer;
-
-      &.active {
-         color: #555;
-         background-color: #e7e7e7;
-         cursor: pointer;
-       }
+      text-decoration: none;
+      padding: 5px;
+      font-size: 18px;
+      padding-top: 22px;
 
       &:hover {
          color: #333;
          background-color: #92e7bf;
        }
+    }
+
+    .router-link-exact-active {
+        color: #555;
+        background-color: #e7e7e7;
+        cursor: pointer;
     }
 
     .username {

@@ -9,7 +9,8 @@
       <label for="username">Logged In User:</label>
       <input name="username" placeholder="your email address" type="text"
              v-model="username"
-             @keyup.enter="handleUsernameChanged">
+             @keyup.enter="handleUsernameChanged"
+             ref="usernameField">
     </div>
   </v-toolbar>
 </template>
@@ -24,8 +25,11 @@
     },
     methods: {
       handleUsernameChanged(){
-        this.$emit('toggleLogon', this.username && this.username.trim());
+        this.$store.commit('toggleLogon', this.username && this.username.trim());
       }
+    },
+    mounted(){
+      this.$refs.usernameField && this.$refs.usernameField.focus()
     }
   }
 </script>

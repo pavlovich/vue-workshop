@@ -1,23 +1,22 @@
 <template>
   <ul class="task-list">
-    <TaskItem v-for="task in tasks" :key="task.id" :task="task" :username="username" @delete="deleteTask" />
-    <li class="task-item" v-if="!tasks || tasks.length === 0">No tasks found.</li>
+    <TaskItem v-for="task in filteredTasks" :key="task.id" :task="task" />
+    <li class="task-item" v-if="!hasTasks">No tasks found.</li>
   </ul>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   import TaskItem from "./TaskItem";
 
   export default {
     name: 'TaskList',
-    props: ['tasks', 'username'],
+    computed: {
+      ...mapGetters(['filteredTasks', 'hasTasks'])
+    },
     components: {
       TaskItem
-    },
-    methods: {
-      deleteTask(task){
-        this.$emit('delete', task);
-      }
     }
   }
 </script>

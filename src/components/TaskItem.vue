@@ -2,26 +2,20 @@
   <li class="task-item">
     <span class="text">{{task.name}}</span>
     <span class="email" v-if="task.owner">{{task.owner}}</span>
-    <button class="delete-button" v-if="canDelete" @click.stop="deleteTask">&times;</button>
+    <button class="delete-button" v-if="canDelete(task)" @click.stop="deleteTask">&times;</button>
   </li>
 </template>
 
 <script>
+  import { mapActions, mapGetters } from 'vuex';
   export default {
     name: 'TaskItem',
-    props: ['task', 'username'],
+    props: ['task'],
     computed: {
-      isOwner() {
-        return this.username && this.username === this.task.owner;
-      },
-      canDelete() {
-        return this.isOwner;
-      }
+      ...mapGetters(['canDelete'])
     },
     methods: {
-      deleteTask() {
-        this.$emit('delete', this.task);
-      }
+      ...mapActions(['deleteTask'])
     }
   }
 </script>

@@ -8,9 +8,9 @@
               <v-flex xs8>
                 <v-card class="tasks">
                   <TaskListHeader />
-                  <TaskFilter @update:filterString="updateTaskFilter" />
-                  <TaskList :tasks="filteredTasks" :username="username" @delete="deleteTask" />
-                  <NewTask :task="newTask" @create:task="createTask" v-if="isLoggedOn" />
+                  <TaskFilter />
+                  <TaskList />
+                  <NewTask />
                 </v-card>
               </v-flex>
             </v-layout>
@@ -22,8 +22,6 @@
 </template>
 
 <script>
-  import Task from "../models/task";
-
   import TaskListHeader from './TaskListHeader';
   import TaskList from "./TaskList";
   import TaskFilter from "./TaskFilter";
@@ -31,62 +29,17 @@
 
   export default {
     name: "Tasks",
-    props: ['username'],
     components: {
       TaskList,
       TaskListHeader,
       TaskFilter,
       NewTask
-    },
-    data(){
-      return {
-        newTask: new Task({}),
-        tasks: [],
-        filterString: '',
-        nextId: 0
-      }
-    },
-    computed: {
-      filteredTasks(){
-        return this.tasks
-          .filter((task) => {return task.name && this.filterString ? task.name.includes(this.filterString) : true});
-      },
-      isLoggedOn(){
-        return !!this.username;
-      }
-    },
-    methods: {
-      updateTaskFilter(newFilterString) {
-        this.filterString = newFilterString;
-      },
-      incrementNextId(){
-        this.nextId = this.nextId + 1;
-      },
-      getNextId(){
-        const id = this.nextId;
-        this.incrementNextId();
-        return id;
-      },
-      addTask(task){
-        this.tasks.push(task);
-      },
-      createTask(){
-        this.newTask.id = this.getNextId();
-        this.newTask.owner = this.username;
-        this.addTask(this.newTask);
-        this.newTask = new Task({});
-      },
-      deleteTask(item){
-        let newTasks = [...this.tasks];
-        let indexToUpdate = this.tasks.findIndex((task) => {return task.matches(item)});
-        newTasks.splice(indexToUpdate, 1);
-        this.tasks = newTasks;
-      }
     }
   };
 </script>
 
 <style scoped lang="less">
+
   .result-container {
     height: 100%;
   }

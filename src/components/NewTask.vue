@@ -1,21 +1,45 @@
 <template>
-  <form name="newTask" class="new-task" @submit.prevent="submitTask">
-    <input id="newTaskField" type="text" name="text" v-model="task.name" :placeholder="placeholder" autocomplete="off" />
+  <form name="newTask" class="new-task" @submit.prevent.stop="createTask()" v-if="isLoggedOn">
+    <input id="newTaskField" type="text" name="text" v-model="newTask.name" :placeholder="placeholder" autocomplete="off" ref="taskField" />
   </form>
 </template>
 
 <script>
+  import Vue from 'vue';
+  import { mapGetters, mapActions } from 'vuex';
   export default {
     name: "NewTask",
-    props: ['task'],
     data(){
       return {
         placeholder: "Type the name for a new task and press <Enter> to create it."
       }
     },
+    computed: {
+      ...mapGetters(['isLoggedOn', 'username', 'newTask']),
+    },
     methods: {
-      submitTask() {
-        this.$emit('create:task');
+      ...mapActions(['createTask']),
+      taskField(){
+        return this.$refs.taskField;
+      },
+      activateTaskField() {
+        Vue.nextTick(() => {
+          let taskField = this.taskField();
+          if (taskField) {
+            taskField.focus();
+          }
+        }, this);
+      }
+
+    },
+    mounted(){
+      this.activateTaskField();
+    },
+    watch: {
+      username: function(newName, oldName){
+        if(!!newName && newName.trim() && newName !== oldName){
+          this.activateTaskField();
+        }
       }
     }
   }

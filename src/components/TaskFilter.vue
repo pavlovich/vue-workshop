@@ -7,20 +7,19 @@
 
 <script>
   export default {
-    props: ['taskFilter'],
-    data() {
-      return {
-        filterString: ''
-      }
-    },
-    watch: {
-      filterString(newFilterString){
-        this.$emit('update:filterString', newFilterString);
+    computed: {
+      filterString: {
+        get(){
+          return this.$store.state.filterString;
+        },
+        set(value){
+          this.$store.commit('updateFilterString', value);
+        }
       }
     },
     methods: {
       clearTextFilter(){
-        this.filterString = '';
+        this.$store.commit('updateFilterString', null);
       }
     }
   }

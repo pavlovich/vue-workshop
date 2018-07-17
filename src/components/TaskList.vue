@@ -1,22 +1,22 @@
 <template>
   <ul class="task-list">
-    <li class="task-item">
-      <span class="text">Task 1</span>
-    </li>
-
-    <li class="task-item">
-      <span class="text">Task 2</span>
-    </li>
-
-    <li class="task-item">
-      <span class="text">Task 3</span>
-    </li>
+    <TaskItem v-for="task in tasks" :task="task" />
   </ul>
 </template>
 
 <script>
+  import TaskItem from "./TaskItem";
+
   export default {
-    name: 'TaskList'
+    name: 'TaskList',
+    components: {
+      TaskItem
+    },
+    data(){
+      return {
+        tasks: ['Task 1', 'Task 2', 'Task 3']
+      }
+    }
   }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <ul class="task-list">
-    <TaskItem v-for="task in tasks" :key="task.id" :task="task" />
+    <TaskItem v-for="task in tasks" :key="task.id" :task="task" :username="username" @delete="deleteTask" />
     <li class="task-item" v-if="!tasks || tasks.length === 0">No tasks found.</li>
   </ul>
 </template>
@@ -10,9 +10,14 @@
 
   export default {
     name: 'TaskList',
-    props: ['tasks'],
+    props: ['tasks', 'username'],
     components: {
       TaskItem
+    },
+    methods: {
+      deleteTask(task){
+        this.$emit('delete', task);
+      }
     }
   }
 </script>

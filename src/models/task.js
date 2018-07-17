@@ -11,6 +11,11 @@ export class Task {
   ) {
     Object.assign(this, {id, personal, checked, owner, name, createdAt});
   }
+
+  matches(task){
+    return task.id == this.id;
+  }
+
 }
 
 export default Task;

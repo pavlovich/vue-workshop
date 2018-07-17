@@ -9,7 +9,7 @@
                 <v-card class="tasks">
                   <TaskListHeader />
                   <TaskFilter @update:filterString="updateTaskFilter" />
-                  <TaskList :tasks="filteredTasks" />
+                  <TaskList :tasks="filteredTasks" :username="username" @delete="deleteTask" />
                   <NewTask :task="newTask" @create:task="createTask" v-if="isLoggedOn" />
                 </v-card>
               </v-flex>
@@ -75,6 +75,12 @@
         this.newTask.owner = this.username;
         this.addTask(this.newTask);
         this.newTask = new Task({});
+      },
+      deleteTask(item){
+        let newTasks = [...this.tasks];
+        let indexToUpdate = this.tasks.findIndex((task) => {return task.matches(item)});
+        newTasks.splice(indexToUpdate, 1);
+        this.tasks = newTasks;
       }
     }
   };
